@@ -1,0 +1,22 @@
+--perUrlRateLimit访问频率限制
+--格式 : URL正则表达式#maxReqs=最大请求数#
+--注意：行首没有空格
+--如: ^/user/Register.aspx.*$#maxReqs=20
+--若不是具体的URL，而是一个正则，#maxReqs=0
+--如: \.ashx.*$#maxReqs=0
+--
+--
+\.ashx.*$#maxReqs=0
+/pages/ajax/newinvest_list.ashx#maxReqs=38
+--/user/new_tuandai_ajax/Reg.ashx#maxReqs=15
+--/ajaxCross/Reg.ashx#maxReqs=20
+--/user/Register.aspx#maxReqs=20
+/user/login.aspx#maxReqs=40
+--/ajaxCross/Login.ashx#maxReqs=180
+--/user/regad/index.html#maxReqs=20
+--/ajaxCross/ajax.ashx#maxReqs=50
+--/ajax/getbbstopiclist.ashx#maxReqs=20
+--/user/services/helloService.ashx#maxReqs=20
+--/user/services/setCookie.aspx#maxReqs=20
+/member/account_moneylist.aspx#maxReqs=30
+/pages/ajax/invest_list.ashx#maxReqs=38

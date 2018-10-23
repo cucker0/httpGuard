@@ -1,0 +1,11 @@
+Baiduspider
+--Baiduspider/2.0
+360Spider
+Sogou(.*)+spider
+--Sogou Pic Spider/3.0
+--Sogou web spider/4.0
+Googlebot
+--Googlebot/2.1
+--Googlebot-Mobile/2.1
+bingbot
+--bingbot/2.0

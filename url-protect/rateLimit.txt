@@ -1,0 +1,21 @@
+--rateLimit访问频率限制
+--格式 : URL正则表达式#maxReqs=小频率最大请求数#bigMaxReqs=大频率最大请求数
+--注意：行首没有空格
+--如: ^/user/Register.aspx.*$#maxReqs=180#bigMaxReqs=60
+--
+--
+^/ajaxCross/Login.ashx#maxReqs=240#bigMaxReqs=1800
+^/ajaxCross/Reg.ashx#maxReqs=120#bigMaxReqs=800
+^/ajaxCross/weixin_ajax_safe.ashx#maxReqs=120#bigMaxReqs=800
+^/ValidateCode.ashx#maxReqs=120#bigMaxReqs=800
+^/ajaxCross/ajax_invest.ashx#maxReqs=120#bigMaxReqs=800
+^/pages/invest/jing_detail.aspx#maxReqs=120#bigMaxReqs=800
+^/pages/ajax/newinvest_list.ashx#maxReqs=120#bigMaxReqs=800
+^/member/ajaxCross/ajax_autoLoan.ashx#maxReqs=120#bigMaxReqs=1800
+--^/user/Register.aspx#maxReqs=20#bigMaxReqs=300
+--^/user/login.aspx#maxReqs=22#bigMaxReqs=300
+--^/user/regad/index.html#maxReqs=20#bigMaxReqs=300
+--^/ajaxCross/ajax.ashx#maxReqs=50#bigMaxReqs=300
+--^/ajax/getbbstopiclist.ashx#maxReqs=20#bigMaxReqs=300
+--^/user/services/helloService.ashx#maxReqs=20#bigMaxReqs=300
+--^/user/services/setCookie.aspx#maxReqs=20#bigMaxReqs=300

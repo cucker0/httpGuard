@@ -1,0 +1,1 @@
+.(css|js|ico|png|jpg|jpeg|gif|mp4|bmp|htc|pdf|doc|xls|xlsx)(\?[A-Za-z0-9='"&\-_.]+$|$)

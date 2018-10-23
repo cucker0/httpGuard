@@ -1,0 +1,142 @@
+        /*主面板样式*/
+        #container { 
+                width:100%; 
+                margin:0px auto;/*主面板DIV居中*/
+        }
+        /*顶部面板样式*/
+        #header {
+                width:100%;
+                height:150px;
+                border-bottom:1px #66CCFF solid;
+                position:relative;
+        }
+        /*标题*/
+        #biaoTi {
+                width:100%;
+                height:30px;
+        }
+        /*中间部分面板样式*/
+        #main {
+                width:100%;
+                height:auto;
+		font-family:"Lucida Grande",tahoma,arial,"微软雅黑","宋体";
+		font-size:14px; 
+        } 
+
+        .byDeny, .byWhite, .black, .white, .challenge, .rateLimit, .list {
+                float:left;
+                width:20%;
+                height:100%;
+                font-family:"微软雅黑"; 
+                font-size:14px;
+        }
+
+        .btn1 {
+                float:right;
+                margin-right:15px; 
+                margin-top:35px; 
+                width:85px; 
+                height:30px; 
+                background:#56c458;
+                font-family:"微软雅黑"; 
+                font-size:16px; 
+                color:#FFFFFF; 
+                border:0;
+                cursor:pointer;
+        }
+
+        .put {
+                position:absolute;
+                bottom:10px; 
+                font-family:"微软雅黑"; 
+                font-size:15px;
+        }
+
+        .string-1 {
+                font-family:"微软雅黑";
+                font-size:26px;
+                margin:0px auto;
+                text-align:center;
+        }
+
+	#goToTop {
+		position:fixed;
+		bottom:12%;
+		right:6%;
+	}
+
+	#goToTop span {
+		background:none repeat scroll 0 0 #BBB;
+		border-radius:6px;
+		-webkit-border-radius:3px;
+		color:#06F;
+		font-size:14px;
+		padding:10px;
+		text-decoration:none;
+		text-shadow:0 1px 0 #6CF;
+		-webkit-text-shadow:0 1px 0 #6CF;
+		font-family:Arial, Helvetica, sans-serif;
+		filter:alpha(Opacity=96); -moz-opacity:0.96; opacity:0.96;
+		cursor:pointer;    
+	}
+
+	#goToRight {
+		position:fixed;
+		bottom:50%;
+		right:1%;
+	}
+
+	a:link, a:visited, a:active {
+ 		text-decoration:none;  /*超链接无下划线*/
+		color:#6CF;
+		font-size:14px;
+		
+	}
+
+	#goToLeft {
+		position:fixed;
+		bottom:50%;
+		left:1%;
+	}
+
+	#Ta {
+		position:fixed;
+		top:2.5%;
+		right:20px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		background:#FFF;
+	}
+
+	.tab { 
+		width:100%; 
+		height:auto; 
+		margin:auto; 
+		margin-top:30px; 
+		margin-bottom:30px; 
+	}
+
+	.td1 { 
+		border-bottom:#DCDCDC solid 1px; width:24%; height:40px; 
+	}
+
+	.td2 { 
+		border-bottom:#DCDCDC solid 1px; width:76%; height:40px; 
+	}
+
+	.td3 { 
+		border-bottom:#DCDCDC solid 1px; width:24%; height:120px; 
+	}
+
+	.td4 { 
+		border-bottom:#DCDCDC solid 1px; width:76%; height:120px; 
+	}
+
+	.text1 { 
+		width:76%; height:116px; 
+	}
+
+	.btn2 { 
+		float:right; margin-right:14%; background:#56c458; font-family:"微软雅黑"; font-size:15px; color:#FFFFFF; border:0; cursor:pointer; 
+	}
+

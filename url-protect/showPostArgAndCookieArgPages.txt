@@ -1,0 +1,3 @@
+--^/ajaxCross/Reg.ashx
+--.*$
+/member/ajaxCross/ajax_autoLoan.ashx
