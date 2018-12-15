@@ -126,7 +126,7 @@ prevent cc attack
 * 修正captch、click验证中上次访问url含 verify-captch.do自动截断preurl到 verify-captch.do
 
 ### v3.6.9.1
-* hg管理后*台添加click隐式验证、click显式验证
+* hg管理后台添加click隐式验证、click显式验证
 * 显示click验证页面调整样式，内容垂直左右居中
 
 
