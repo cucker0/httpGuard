@@ -288,11 +288,8 @@ lua_max_running_timers 1;
 
 ```
 
-## 更新操作* 说明：
+## 更新操作说明：
 * click验证（clickAction）中添加 由 captcha验证失败过来的请求不再发送 preurl 上次请求的URL
-
 * 更改init.lua初始化时加载字典条件，直接加载验证码、byWhite列表IP、byDeny列表IP到字典
-
 * All-:让所选字典里的Key都过期
-
 * w+:把byDeny, byWhite初始化后添加的IP到文件
