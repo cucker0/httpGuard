@@ -6,12 +6,6 @@ prevent cc attack
 
 ## 变更情况：
 
-### v3.7.6.5
-* 优化生成随机的ID方法
-
-### v3.7.6.4
-* 添加TraceId、SpanId处理功能
-
 ### v3.7.6.3
 * 优化获取验证码裂图功能
 * 增加needVerify名单，把原来perUrlRateLimit验证功能分离出来
