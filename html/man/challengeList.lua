@@ -6,12 +6,12 @@ local challengeKey = dict_challenge:get_keys(0)
 local total = 0
 local ip = ''
 local challengeExpire = 0
-if _Conf.redirectModulesIsOn then		
-	challengeExpire = _Conf.redirectModules.amongTime
-elseif  _Conf.JsJumpModulesIsOn then
-	challengeExpire = _Conf.JsJumpModules.amongTime
+if _Conf.redirectModulesIsOn then
+    challengeExpire = _Conf.redirectModules.amongTime
+elseif _Conf.JsJumpModulesIsOn then
+    challengeExpire = _Conf.JsJumpModules.amongTime
 elseif _Conf.cookieModulesIsOn then
-	challengeExpire = _Conf.cookieModules.amongTime
+    challengeExpire = _Conf.cookieModules.amongTime
 end
 
 
@@ -28,11 +28,10 @@ ngx.say("</head>")
 ngx.say("<body>")
 ngx.say('<div  id = "container" >')
 
-
-for k,v in pairs(challengeKey) do
-        local val, fla = dict_challenge:get(v)
-	ngx.say(v, kg1, val,hh)
-        total = total + 1
+for k, v in pairs(challengeKey) do
+	local val, fla = dict_challenge:get(v)
+	ngx.say(v, kg1, val, hh)
+	total = total + 1
 end
 
 ngx.say("</div>")

@@ -19,13 +19,13 @@ ngx.say("</head>")
 ngx.say("<body>")
 ngx.say('<div  id = "container" >')
 
-for k,v in pairs(byWhiteKey) do
-        local val, fla = dict_byWhiteIp:get(v)
-        if not fla then
-                fla = "nil"
-        end
-	ngx.say(v, kg1, fla, kg1, val, hh)
-        total = total + 1
+for k, v in pairs(byWhiteKey) do
+    local val, fla = dict_byWhiteIp:get(v)
+    if not fla then
+        fla = "nil"
+    end
+    ngx.say(v, kg1, fla, kg1, val, hh)
+    total = total + 1
 end
 
 ngx.say("</div>")

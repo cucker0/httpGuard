@@ -8,8 +8,8 @@ local whiteExpire = _Conf.whiteTime
 local oneKeyOpenVerificationOn = _Conf.dict_system:get("oneKeyOpenVerificationOn")
 
 if oneKeyOpenVerificationOn == 1 then
-	local oneKeyOpenVerificationOn_whiteTime = _Conf.dict_system:get("oneKeyOpenVerification_whiteTime")
-	whiteExpire = oneKeyOpenVerificationOn_whiteTime
+    local oneKeyOpenVerificationOn_whiteTime = _Conf.dict_system:get("oneKeyOpenVerification_whiteTime")
+    whiteExpire = oneKeyOpenVerificationOn_whiteTime
 end
 
 
@@ -27,16 +27,16 @@ ngx.say("</head>")
 ngx.say("<body>")
 ngx.say('<div  id = "container" >')
 
-for k,v in pairs(whiteKey) do
-        --local val, fla, sta = dict_white:get_stale(v)
-        --ip = table.concat({ ip, v, hh })
-	ngx.say(v, hh)
-        total = total + 1
+for k, v in pairs(whiteKey) do
+    --local val, fla, sta = dict_white:get_stale(v)
+    --ip = table.concat({ ip, v, hh })
+    ngx.say(v, hh)
+    total = total + 1
 end
 
 ngx.say("</div>")
 ngx.say('<div id = "listHead">')
-ngx.say("  <a href = ../wlist >WhiteList: </a>",hh)
+ngx.say("  <a href = ../wlist >WhiteList: </a>", hh)
 ngx.say("  Keys[ ", total, " ]  ", "Expire(", whiteExpire, "s)")
 ngx.say("</div>")
 ngx.say("</body>")

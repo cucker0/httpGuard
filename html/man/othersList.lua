@@ -8,18 +8,18 @@ local total = 0
 
 --从字典检出key
 local function checkKey(keyType)
-	--local total = 0
-	--local key = ''
-	for k,v in pairs(othersKey) do
-		local matchKey = string.match(v,keyType)
-		if matchKey then
-			local val, fla = dict_others:get(v)
-			--key = table.concat({ key, v, kg1, val,hh })
-			ngx.say(v, kg1, val,hh)
-			total = total + 1
-		end
-	end
-	--return key, total
+    --local total = 0
+    --local key = ''
+    for k, v in pairs(othersKey) do
+        local matchKey = string.match(v, keyType)
+        if matchKey then
+            local val, fla = dict_others:get(v)
+            --key = table.concat({ key, v, kg1, val,hh })
+            ngx.say(v, kg1, val, hh)
+            total = total + 1
+        end
+    end
+    --return key, total
 end
 
 --local rateLimitDenyKey, rateLimitDenyTotal = checkKey("ratelimit")

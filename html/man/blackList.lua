@@ -19,10 +19,10 @@ ngx.say("</head>")
 ngx.say("<body>")
 ngx.say('<div  id = "container" >')
 
-for k,v in pairs(blackKey) do
-        local val, fla, sta = dict_black:get_stale(v)
-	ngx.say(v, kg1, val, hh)
-        total = total + 1
+for k, v in pairs(blackKey) do
+    local val, fla, sta = dict_black:get_stale(v)
+    ngx.say(v, kg1, val, hh)
+    total = total + 1
 end
 
 ngx.say("</div>")

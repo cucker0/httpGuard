@@ -20,11 +20,10 @@ ngx.say("</head>")
 ngx.say("<body>")
 ngx.say('<div  id = "container" >')
 
-
-for k,v in pairs(needVerifyKey) do
+for k, v in pairs(needVerifyKey) do
     --local val, fla = dict_needVerify:get(v)
-	--ngx.say(v, kg1, val,hh)
-	ngx.say(v, hh)
+    --ngx.say(v, kg1, val,hh)
+    ngx.say(v, hh)
     total = total + 1
 end
 

@@ -14,62 +14,62 @@ local hgmanPage = [[
 </head>
 
 <body>
-	<div id="container">
-		<div id="header">
-			<div id=biaoTi>
-				<p class="string-1" >HttpGuard Management</p>
-			</div>
-			<form name="frmPost1" action="/update_list" method="POST" target="hiddenIframe" >
-				<span class="put">
-										
-					<label><input name="addDel" type="radio" value="add" checked="CHECKED" >+</label>
-					<label><input name="addDel" type="radio" value="del">-</label>
-					<label><input name="addDel" type="radio" value="all-">All-</label>
-					<label><input name="addDel" type="radio" value="w+">w+</label>&nbsp;&nbsp;&nbsp;&nbsp;
-					IP：<textarea name="ip_put" id="ip_put" cols="35" rows="5"></textarea>&nbsp;&nbsp;&nbsp;&nbsp;
-					Expire：<input type="text" size="6" name="custom_Time" onKeyUp="num(custom_Time)" onKeyDown="num(custom_Time)" >s &nbsp;&nbsp;&nbsp;&nbsp;
-					名单：
-					<select name="list_type">
-						<option value="none" selected="selected">None</option>
-						<option value="byDeny">byDeny</option>
-						<option value="byWhite">byWhite</option>
-						<option value="black">black黑名单</option>
-						<option value="white302">white302跳转</option>
-						<option value="whitejs">whiteJS跳转</option>
-						<option value="whitecookie">whiteCookie</option>
-						<option value="whiteVerification">whiteVerification</option>
-						<option value="challenge">challenge</option>
-						<option value="rateLimit">rateLimitDeny</option>
-						<option value="whitePerUrlRateLimit">whitePerUrlRateLimit</option>
-						<option value="perUrlRateLimit">perUrlRateLimit</option>
-						<option value="needVerify">needVerify</option>
-					</select> &nbsp;&nbsp;&nbsp;&nbsp;
-					注释：<input type="text" size="12" name="comment" >
-				</span>
-				<input class="btn1" type="submit" value="确定" >
-			</form>
-			<iframe style="display:none" name="hiddenIframe" id="hiddenIframe" ></iframe>
-		</div>
+    <div id="container">
+        <div id="header">
+            <div id=biaoTi>
+                <p class="string-1" >HttpGuard Management</p>
+            </div>
+            <form name="frmPost1" action="/update_list" method="POST" target="hiddenIframe" >
+                <span class="put">
+                                        
+                    <label><input name="addDel" type="radio" value="add" checked="CHECKED" >+</label>
+                    <label><input name="addDel" type="radio" value="del">-</label>
+                    <label><input name="addDel" type="radio" value="all-">All-</label>
+                    <label><input name="addDel" type="radio" value="w+">w+</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    IP：<textarea name="ip_put" id="ip_put" cols="35" rows="5"></textarea>&nbsp;&nbsp;&nbsp;&nbsp;
+                    Expire：<input type="text" size="6" name="custom_Time" onKeyUp="num(custom_Time)" onKeyDown="num(custom_Time)" >s &nbsp;&nbsp;&nbsp;&nbsp;
+                    名单：
+                    <select name="list_type">
+                        <option value="none" selected="selected">None</option>
+                        <option value="byDeny">byDeny</option>
+                        <option value="byWhite">byWhite</option>
+                        <option value="black">black黑名单</option>
+                        <option value="white302">white302跳转</option>
+                        <option value="whitejs">whiteJS跳转</option>
+                        <option value="whitecookie">whiteCookie</option>
+                        <option value="whiteVerification">whiteVerification</option>
+                        <option value="challenge">challenge</option>
+                        <option value="rateLimit">rateLimitDeny</option>
+                        <option value="whitePerUrlRateLimit">whitePerUrlRateLimit</option>
+                        <option value="perUrlRateLimit">perUrlRateLimit</option>
+                        <option value="needVerify">needVerify</option>
+                    </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                    注释：<input type="text" size="12" name="comment" >
+                </span>
+                <input class="btn1" type="submit" value="确定" >
+            </form>
+            <iframe style="display:none" name="hiddenIframe" id="hiddenIframe" ></iframe>
+        </div>
 
-		<div id="main">
-			<div class="byDeny">
-				<iframe src="/bydlist" id="bydPage" name="bydPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
-			</div>
-			<div class="byWhite">
-				<iframe src="/bywlist" id="bywPage" name="bywPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
-			</div>
-			<div class="black">
-				<iframe src="/blist" id="blPage" name="blPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
-			</div>
-			<div class="white">
-				<iframe src="/wlist" id="whPage" name="whPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
-			</div>
-			<div class="challenge">
-				<iframe src="/clist" id="chPage" name="chPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
-			</div>
-		</div>
+        <div id="main">
+            <div class="byDeny">
+                <iframe src="/bydlist" id="bydPage" name="bydPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
+            </div>
+            <div class="byWhite">
+                <iframe src="/bywlist" id="bywPage" name="bywPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
+            </div>
+            <div class="black">
+                <iframe src="/blist" id="blPage" name="blPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
+            </div>
+            <div class="white">
+                <iframe src="/wlist" id="whPage" name="whPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
+            </div>
+            <div class="challenge">
+                <iframe src="/clist" id="chPage" name="chPage" width="100%" onLoad="iframeHeight(id)" frameborder=0 ></iframe>
+            </div>
+        </div>
 
-	</div>
+    </div>
 <div id="goToTop"><span>^Top</span></div>
 <div id="goToRight"><span><a text-decoration: none; href="/hgman2">->></a></span></div>
 ]]
