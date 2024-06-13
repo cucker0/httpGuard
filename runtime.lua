@@ -155,16 +155,3 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
     end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-

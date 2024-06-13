@@ -6,7 +6,7 @@ else
     requireGuard = require "guard_static"
 end
 
-local version = "v3.7.6.3"        --HttpGuard 版本号
+local version = "v3.7.6.3"  --HttpGuard 版本号
 
 --开关转换为true或false函数
 local function optionIsOn(options)
