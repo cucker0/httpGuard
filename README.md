@@ -1,10 +1,20 @@
 http-guard
 ==========
 
-prevent cc attack
+## http-guard 是什么
+httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防火墙（WAF）。用于阻断恶意非法的请求，放行合法的请求。
 
+## 功能
+* 支持 IP 黑名单、IP 白名单
+* URL 过滤（URL 黑名单、URL 白名单）
+* URL 访问频率限制
+* POST 参数过滤
+* GET 参数过滤（Query Args 过滤）
+* Cookie过滤
+* User-Agent 过滤
+* 人机识别（验证码、JS跳转的方式实现）
 
-## 变更情况：
+## 变更情况
 
 ### v3.7.6.3
 * 优化获取验证码裂图功能
