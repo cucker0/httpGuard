@@ -1,7 +1,7 @@
-http-guard
+httpGuard
 ==========
 
-## http-guard 是什么
+## httpGuard 是什么
 httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防火墙（WAF）。用于阻断恶意非法的请求，放行合法的请求。
 
 ## 功能
