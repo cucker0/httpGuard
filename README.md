@@ -73,21 +73,32 @@ http {
 ```
 4. 配置 HttpGuard 管理后台
 
-a. 创建 nginx 的 basic 认证文件，保存用户、密码信息
-
-新建文件 /etc/nginx/auth_basic，内容格式如下
+a. 开启基于Basic的认证
 ```bash
-admin:B@o31Vj3yw4v
-```
-这里的用户、密码都是明文的。
+// 安装 httpd-tools
+yum -y install httpd-tools
 
-权限设置
+// 创建用户、密码，并保存到指定文件
+htpasswd -c /usr/local/nginx/conf/htpasswd admin
+New password:  // 输入密码
+Re-type new password:  // 再次输入密码
+Adding password for user admin
+```
+需要记住上面输入的密码。
+
+/etc/nginx/auth_basic 文件内容
+```bash
+admin:/QpgJCY6zT5j..
+```
+这里的密码是加密的
+
+b. 文件权限设置
 ```bash
 chown nginx:nginx /etc/nginx/auth_basic
 chmod 400 /etc/nginx/auth_basic
 ```
 
-b. 新建一个 server 配置，创建 /etc/nginx/conf.d/wafman.conf
+c. 新建一个 server 配置，创建 /etc/nginx/conf.d/wafman.conf
 ```bash
 server {
     listen 17818;
@@ -203,7 +214,26 @@ server {
 
 5. 验证测试
 
-重启 nginx 服务, 通过 `http://[server_name]/hgman` 进行访问管理
+重启 nginx 服务
+```bash
+systemctl restart nginx
+```
+
+通过 `http://[server_name]/man` 进行访问管理
+
+后台管理界面
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/man.png)
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/hgman_updateList1.png)
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/hgman_updateList2.png)
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/hgman_updateList3.png)
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/hgman_updateSystem1.png)
+
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/hgman_updateSystem2.png)
 
 ## 模块功能说明
 ```
