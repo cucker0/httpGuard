@@ -59,10 +59,7 @@
     </div>
 </div>
 <div class="foot">
-    &copy;2010-<script>document.write(getYear());</script> Tuandai.com 版权所有
-    <a href="http://www.miitbeian.gov.cn" target="_blank" rel="noflow">粤ICP备12043601号-1</a>
-    <a rel="external nofollow" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44190002000538" target="_blank">粤公网安备44190002000538号</a>
-    &nbsp;&nbsp;东莞团贷网互联网科技服务有限公司 地址：东莞市南城街道莞太路111号众创金融大厦1号楼28楼
+
 </div>
 </body>
 
