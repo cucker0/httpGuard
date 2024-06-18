@@ -100,7 +100,7 @@ Adding password for user admin
 ```
 需要记住上面输入的密码。
 
-/etc/nginx/auth_basic 文件内容
+/etc/nginx/auth_basic 文件内容格式示例
 ```bash
 admin:/QpgJCY6zT5j..
 ```
