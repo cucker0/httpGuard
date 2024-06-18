@@ -26,12 +26,12 @@ function Guard:getRealIp(remoteIp, headers)
         realIp = headers[_Conf.realIpFromHeader.header]
         if realIp then
             --self:debug(type(realIp).."[==========>] realIpFromHeader is on.return ip "..realIp,remoteIp,"")
-            -- realIp 类型一般为 string
+            --realIp 类型一般为 string
             if type(realIp) == "table" then
                 realIp = realIp[1]
             end
-            -- X-Forwarded-For:用户IP, 代理服务器1-IP, 代理服务器2-IP, 代理服务器3-IP, ……
-            -- 获取用户IP
+            --X-Forwarded-For:用户IP, 代理服务器1-IP, 代理服务器2-IP, 代理服务器3-IP, ……
+            --获取用户IP
             local regex = [[\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}]]
             --local regex = "[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"
             local m = ngx.re.match(realIp, regex, "ijo") or false
@@ -39,7 +39,7 @@ function Guard:getRealIp(remoteIp, headers)
             if m then
                 realIp = m[0]
             else
-                -- get realIp fail, set default ip 0.0.0.7
+                --get realIp fail, set default ip 0.0.0.7
                 realIp = "0.0.0.7"
             end
             --self:debug(realIp.."[==========>] realIpFromHeader is on.return ip "..realIp,remoteIp,"")
@@ -58,7 +58,7 @@ end
 function Guard:ipInByWhiteList(ip)
     if _Conf.byWhiteIpModulesIsOn then
         --判断是否开启白名单模块
-        -- self:debug("[ipInByWhiteList] byWhiteIpModules is on.",ip,"")
+        --self:debug("[ipInByWhiteList] byWhiteIpModules is on.",ip,"")
         if _Conf.dict_byWhiteIp:get(ip) then
             self:debug("[ipInByWhiteList] ip " .. ip .. " in byWhite list", ip, "")
             return true
@@ -73,7 +73,7 @@ end
 function Guard:ipInByDenyList(ip)
     if _Conf.byDenyIpModulesIsOn then
         --判断是否开启 byDeny 黑名单模块
-        -- self:debug("[ipInByDenyList] byDenyIpModules is on.",ip,"")
+        --self:debug("[ipInByDenyList] byDenyIpModules is on.",ip,"")
         if _Conf.dict_byDenyIp:get(ip) then
             self:debug("[ipInByDenyList] ip " .. ip .. " in byDeny list ", ip, "")
             return true
@@ -152,7 +152,7 @@ function Guard:redirectModules(ip, reqUri, address)
             return
         else
             --如果不在白名单,再检测是否有cookie凭证
-            local now = ngx.time() --当前时间戳
+            local now = ngx.time()  --当前时间戳
             local challengeTimesKey = table.concat({ ip, "challenge302" })
             local challengeTimesValue = _Conf.dict_challenge:get(challengeTimesKey)
             local blackKey = ip .. "black"
@@ -338,14 +338,14 @@ function Guard:JsJumpModules(ip, reqUri, address)
             return
         else
             --如果不在白名单,检测是否有cookie凭证
-            local cookie_key = ngx.var["cookie_keyjs"] --获取cookie密钥
-            local cookie_expire = ngx.var["cookie_expirejs"] --获取cookie密钥过期时间
-            local now = ngx.time() --当前时间戳
+            local cookie_key = ngx.var["cookie_keyjs"]  --获取cookie密钥
+            local cookie_expire = ngx.var["cookie_expirejs"]  --获取cookie密钥过期时间
+            local now = ngx.time()  --当前时间戳
             local challengeTimesKey = table.concat({ ip, "challengejs" })
             local challengeTimesValue = _Conf.dict_challenge:get(challengeTimesKey)
             local blackKey = ip .. "black"
-            local cookie_key = ngx.var["cookie_keyjs"] --获取cookie密钥
-            local cookie_expire = ngx.var["cookie_expirejs"] --获取cookie密钥过期时间
+            local cookie_key = ngx.var["cookie_keyjs"]  --获取cookie密钥
+            local cookie_expire = ngx.var["cookie_expirejs"]  --获取cookie密钥过期时间
 
             if cookie_key and cookie_expire then
                 local key_make = ngx.md5(table.concat({ ip, _Conf.JsJumpModules.keySecret, cookie_expire }))
@@ -421,14 +421,14 @@ function Guard:JsJumpModules(ip, reqUri, address)
                         --判断传过来的cckey参数值是否等于字典记录的值,且没有过期
                         self:debug("[JsJumpModules] ip " .. ip .. " arg keyjs " .. ccKeyValue .. " is valid.add ip to white list.", ip, reqUri)
                         if challengeTimesValue then
-                            _Conf.dict_challenge:delete(challengeTimesKey) --删除验证失败计数器
+                            _Conf.dict_challenge:delete(challengeTimesKey)  --删除验证失败计数器
                         end
-                        _Conf.dict_white:set(whiteKey, 0, _Conf.whiteTime) --添加ip到白名单
+                        _Conf.dict_white:set(whiteKey, 0, _Conf.whiteTime)  --添加ip到白名单
                         if _Conf.dict_black:get(blackKey) then
                             --如果黑名单中有该IP, 则删除
                             _Conf.dict_black:delete(blackKey)
                         end
-                        ngx.header['Set-Cookie'] = { "keyjs=" .. key_make .. "; path=/", "expirejs=" .. expire .. "; path=/" } --发送cookie凭证
+                        ngx.header['Set-Cookie'] = { "keyjs=" .. key_make .. "; path=/", "expirejs=" .. expire .. "; path=/" }  --发送cookie凭证
                         return
                     else
                         --如果不相等，则再发送302转向
@@ -466,7 +466,7 @@ function Guard:JsJumpModules(ip, reqUri, address)
                             newUrl = table.concat({ reqUri, "?keyjs=", key_new, "&expirejs=", expire })
 
                         end
-                        local jsJumpCode = table.concat({ "<script>window.location.href='", newUrl, "';</script>" }) --定义js跳转代码
+                        local jsJumpCode = table.concat({ "<script>window.location.href='", newUrl, "';</script>" })  --定义js跳转代码
                         ngx.header.content_type = "text/html"
                         ngx.print(jsJumpCode)
                         ngx.exit(200)
@@ -604,7 +604,7 @@ end
 --获取验证码
 function Guard:getCaptcha()
     math.randomseed(ngx.now())  --随机种子
-    --local random = math.random(1,10000) --生成1-10000之间的随机数
+    --local random = math.random(1,10000)  --生成1-10000之间的随机数
     local random = math.random(_Conf.randomInteger, (_Conf.randomInteger + 10000))  --生成一个随机数
     self:debug("[getCaptcha] get random num " .. random, "", "")
     local captchaValue = _Conf.dict_captcha:get(random)  --取得字典中的验证码
@@ -685,7 +685,7 @@ function Guard:verifyCaptcha(ip, reqUri, address)
         --local challengeTimesKey = table.concat({ip,"challengecookie"})
         --local challengeTimesValue = _Conf.dict_challenge:get(challengeTimesKey)
         --if challengeTimesValue then
-        --	_Conf.dict_challenge:delete(challengeTimesKey) --删除challenge列表中验证失败计数器
+        --	_Conf.dict_challenge:delete(challengeTimesKey)  --删除challenge列表中验证失败计数器
         --end
 
         local expire = ngx.time() + _Conf.keyExpire
@@ -703,26 +703,15 @@ function Guard:verifyCaptcha(ip, reqUri, address)
             if challengeTimesValue then
                 _Conf.dict_challenge:incr(challengeTimesKey, 1)
                 --重新发送验证码页面
-                --self:debug("[verifyCaptcha] captcha invalid",ip,"")
-                --ngx.header.content_type = "text/html"
-                --ngx.print(_Conf.reCaptchaPage)
-                --ngx.exit(298)
                 self:reSendCaptch(ip)
             else
                 _Conf.dict_challenge:set(challengeTimesKey, 1, _Conf.captcha2click.amongTime)
                 --重新发送验证码页面
-                --self:debug("[verifyCaptcha] captcha invalid",ip,"")
-                --ngx.header.content_type = "text/html"
-                --ngx.print(_Conf.reCaptchaPage)
-                --ngx.exit(298)
                 self:reSendCaptch(ip)
             end
         else
             --重新发送验证码页面
             --self:debug("[verifyCaptcha] captcha invalid",ip,"")
-            --ngx.header.content_type = "text/html"
-            --ngx.print(_Conf.reCaptchaPage)
-            --ngx.exit(298)
             self:reSendCaptch(ip)
         end
     end
@@ -806,7 +795,7 @@ function Guard:autoSwitch()
         if _Conf.autoEnable.enableModule == "redirectModules" then
             local redirectOn = _Conf.dict_system:get("redirectOn")
             if redirectOn == 1 then
-                _Conf.dict_system:set("exceedCount", 0) --超限次数清0
+                _Conf.dict_system:set("exceedCount", 0)  --超限次数清0
                 --如果当前连接在最大连接之下,为正常次数加1
                 if connection < _Conf.autoEnable.maxConnection then
                     _Conf.dict_system:incr("normalCount", 1)
@@ -849,7 +838,7 @@ function Guard:autoSwitch()
                     _Conf.dict_system:set("jsOn", 0)
                 end
             else
-                _Conf.dict_system:set("normalCount", 0) --正常次数清0
+                _Conf.dict_system:set("normalCount", 0)  --正常次数清0
                 --如果当前连接在最大连接之上,为超限次数加1
                 if connection > _Conf.autoEnable.maxConnection then
                     _Conf.dict_system:incr("exceedCount", 1)
@@ -866,7 +855,7 @@ function Guard:autoSwitch()
         elseif _Conf.autoEnable.enableModule == "cookieModules" then
             local cookieOn = _Conf.dict_system:get("cookieOn")
             if cookieOn == 1 then
-                _Conf.dict_system:set("exceedCount", 0) --超限次数清0
+                _Conf.dict_system:set("exceedCount", 0)  --超限次数清0
                 --如果当前连接在最大连接之下,为正常次数加1
                 if connection < _Conf.autoEnable.maxConnection then
                     _Conf.dict_system:incr("normalCount", 1)
@@ -879,7 +868,7 @@ function Guard:autoSwitch()
                     _Conf.dict_system:set("cookieOn", 0)
                 end
             else
-                _Conf.dict_system:set("normalCount", 0) --正常次数清0
+                _Conf.dict_system:set("normalCount", 0)  --正常次数清0
                 --如果当前连接在最大连接之上,为超限次数加1
                 if connection > _Conf.autoEnable.maxConnection then
                     _Conf.dict_system:incr("exceedCount", 1)
@@ -945,7 +934,7 @@ function Guard:clickAction(ip, reqUri, address)
                 _Conf.dict_challenge:delete(challengeTimesKey)  --删除challenge列表中验证失败计数器
             end
 
-            return ngx.redirect(preurl) - -返回上次访问url
+            return ngx.redirect(preurl)  --返回上次访问url
         else
             --如果clickKeyValue expire不合法, 返回click验证页面
             local newUrl = ''
@@ -956,37 +945,6 @@ function Guard:clickAction(ip, reqUri, address)
             local key_new = string.sub(key_new, "1", "10")
             local args = ngx.req.get_uri_args() or {}
 
-            --[[
-			if next(args) == nil then		--判断请求的reqUri是否带参
-				if ngx.re.match(reqUri,"\\?$","ijo") then		--判断url是否以?结尾
-					newUrl = table.concat({reqUri,"keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," match 1")
-				else
-					newUrl = table.concat({reqUri,"?keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," no match 1")
-				end
-			else
-				local f, t, err = ngx.re.find(reqUri,"&keydj=|keydj=","ijo")
-				if f then
-					local uriStrsub = string.sub(reqUri, 0, f - 1)
-					if ngx.re.match(uriStrsub,"\\?$","ijo") then
-						newUrl = table.concat({uriStrsub,"keydj=",key_new,"&expiredj=",expire})
-						--ngx.say(reqUri," match 2")
-					else
-						newUrl = table.concat({uriStrsub,"&keydj=",key_new,"&expiredj=",expire})
-						--ngx.say(reqUri," no match 2")
-					end
-				else
-					if ngx.re.match(reqUri,"\\?$","ijo") then
-						newUrl = table.concat({reqUri,"keydj=",key_new,"&expiredj=",expire})
-						--ngx.say(reqUri," match 3")
-					else
-						newUrl = table.concat({reqUri,"&keydj=",key_new,"&expiredj=",expire})
-						--ngx.say(reqUri," no match 3")
-					end
-				end
-			end
-			]]
             local f, t, err = ngx.re.find(reqUri, "\\?&keydj|\\?keydj|&keydj=|keydj=", "ijo")
             if f then
                 --url中是否含 &keydj=或keydj=
@@ -1030,40 +988,6 @@ function Guard:clickAction(ip, reqUri, address)
         local key_new = ngx.md5(table.concat({ ip, _Conf.clickKey, expire }))
         local key_new = string.sub(key_new, "1", "10")
         local args = ngx.req.get_uri_args() or {}
-        --[[
-		if next(args) == nil then		--判断请求的reqUri是否带参
-			--newUrl = table.concat({reqUri,"?keydj=",key_new,"&expiredj=",expire})
-			if ngx.re.match(reqUri,"\\?$","ijo") then		--判断url是否以?结尾
-				newUrl = table.concat({reqUri,"keydj=",key_new,"&expiredj=",expire})
-				--ngx.say(reqUri," match 11")
-			else
-				newUrl = table.concat({reqUri,"?keydj=",key_new,"&expiredj=",expire})
-				--ngx.say(reqUri," not match 11")
-			end
-		else
-			local f, t, err = ngx.re.find(reqUri,"&keydj=|keydj=","ijo")
-			if f then
-				local uriStrsub = string.sub(reqUri, 0, f - 1)
-				--newUrl = table.concat({uriStrsub,"&keydj=",key_new,"&expiredj=",expire})
-				if ngx.re.match(uriStrsub,"\\?$","ijo") then
-					newUrl = table.concat({uriStrsub,"keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," match 22")
-				else
-					newUrl = table.concat({uriStrsub,"&keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," not match 22")
-				end
-			else
-				--newUrl = table.concat({reqUri,"&keydj=",key_new,"&expiredj=",expire})
-				if ngx.re.match(reqUri,"\\?$","ijo") then
-					newUrl = table.concat({reqUri,"keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," match 33")
-				else
-					newUrl = table.concat({reqUri,"&keydj=",key_new,"&expiredj=",expire})
-					--ngx.say(reqUri," not match 33")
-				end
-			end
-		end
-		]]
         local f, t, err = ngx.re.find(reqUri, "\\?&keydj|\\?keydj|&keydj=|keydj=", "ijo")
         if f then
             --url中是否含 &keydj=或keydj=
@@ -1406,7 +1330,7 @@ end
 --杂项访问控制
 function Guard:others(userAgent, httpReferer, ip, reqUri, address)
     if _Conf.othersIsOn then
-        -- 显示 _Conf.showPostArgAndCookieArgPages URL中的PostArg、CookieArg值
+        --显示 _Conf.showPostArgAndCookieArgPages URL中的PostArg、CookieArg值
         if _Conf.showPostArgAndCookieArgStateOn then
             local f, t, err = ngx.re.find(address, _Conf.showPostArgAndCookieArgPages, "ijo")
             if f then
@@ -1439,7 +1363,7 @@ function Guard:others(userAgent, httpReferer, ip, reqUri, address)
             end
         end
 
-        -- 访问 _Conf.noneRefererPages 中指定的URL且Referer 为空, 则直接拒绝, 并添加该IP到黑名单
+        --访问 _Conf.noneRefererPages 中指定的URL且Referer 为空, 则直接拒绝, 并添加该IP到黑名单
         if ngx.re.match(address, _Conf.noneRefererPages, "ijo") and (httpReferer == "http_refere_NONE") then
             local blackKey = ip .. "black"
             _Conf.dict_black:set(blackKey, 6, _Conf.blockTime)  --添加此ip到黑名单
@@ -1481,29 +1405,21 @@ function Guard:perUrlRateLimit(ip, reqUri, address, userAgent, httpReferer)
             local whiteKey = ip .. "whitePerUrlRateLimit"
             local inWhiteList = _Conf.dict_white:get(whiteKey)
             if inWhiteList then
-                -- 在byWhite名单时直接通过
+                --在byWhite名单时直接通过
                 return true
             end
 
             --address建议取decode的uri
             if _Conf.urlIgnoreCaseIsOn then
-                -- url转成小写
+                --url转成小写
                 address = string.lower(address)
             end
             local ipUrl = ip .. address
 
             if _Conf.perUrlRateLimit.direct2byDeny ~= 0 then
-                -- 直接黑名单模式
+                --直接黑名单模式
                 self:perUrlRateLimitDirect2byDeny(ip, reqUri, address, userAgent, httpReferer, ipUrl)
             else
-                -- 验证模式
-                -- 是否在perUrlRateLimitVerity验证列表中
-                --local inNeedVerify = _Conf.dict_needVerify:get(ip)
-                --if inNeedVerify then		--在needVerify验证列表中，执行验证码验证
-                --	self:captchaAction(ip,reqUri,address)
-                --	return true
-                --else		--不在PerUrlRateLimitList验证列表中，执行PerUrlRateLimit过滤
-                --if ngx.re.match(address,_Conf.perUrlRateLimitUrlProtect,"ijo") then
                 --应用模式
                 if _Conf.perUrlRateLimit.model ~= 0 then
                     if _Conf.perUrlRateLimit.model == 1 then
@@ -1535,8 +1451,8 @@ function Guard:perUrlRateLimit(ip, reqUri, address, userAgent, httpReferer)
 
                     elseif _Conf.perUrlRateLimit.model == 2 then
                         --request中是否含cookie模式
-                        local cookie_key = ngx.var["cookie_keycookie"] --获取cookie密钥
-                        local cookie_expire = ngx.var["cookie_expirecookie"] --获取cookie密钥过期时间
+                        local cookie_key = ngx.var["cookie_keycookie"]  --获取cookie密钥
+                        local cookie_expire = ngx.var["cookie_expirecookie"]  --获取cookie密钥过期时间
                         if cookie_key and cookie_expire then
                             return true
                         else
@@ -1580,8 +1496,6 @@ function Guard:perUrlRateLimit(ip, reqUri, address, userAgent, httpReferer)
                     self:log("[perUrlRateLimit] within " .. _Conf.perUrlRateLimit.inPerUrlRateLimitAmongTime .. " exceed " .. inUrlRateLimitTimes .. " block in inUrlRateLimit")
                 end
                 return false
-                --end
-                --end
             end
         end
 
@@ -1649,7 +1563,7 @@ function Guard:perUrlRateLimitDirect2byDeny(ip, reqUri, address, userAgent, http
                 end
             elseif _Conf.perUrlRateLimit.direct2byDeny == 2 then
                 if not _Conf.dict_byDenyIp:get(ip) then
-                    _Conf.dict_byDenyIp:set(ip, "perUrlRateLimitDirect2byDeny", _Conf.perUrlRateLimit.inByDenyTime, 8)    --添加此ip到byDeny黑名单
+                    _Conf.dict_byDenyIp:set(ip, "perUrlRateLimitDirect2byDeny", _Conf.perUrlRateLimit.inByDenyTime, 8)  --添加此ip到byDeny黑名单
                     self:log("[perUrlRateLimitDirect2byDeny] IP " .. ip .. " request " .. newReqTimes .. " times,add the ip to byDeny list.")
                 end
             end
@@ -1680,9 +1594,9 @@ function Guard:randomDelayProcessing(ip, reqUri, address, userAgent, httpReferer
     if _Conf.randomDelayProcessingIsOn then
         local f, t, err = ngx.re.find(address, _Conf.randomDelayProcessingUrlProtect, "ijo")
         if f then
-            local rmdTime = _Conf.randomTime()        --生产随机时间差
+            local rmdTime = _Conf.randomTime()  --生产随机时间差
             self:debug("[randomDelayProcessing] " .. "start timestamp:" .. ngx.time() .. " randomTime:" .. rmdTime .. "::" .. userAgent .. "::" .. httpReferer .. "::", ip, reqUri)
-            ngx.sleep(rmdTime)        --睡眠处理
+            ngx.sleep(rmdTime)  --睡眠处理
             self:debug("[randomDelayProcessing] " .. "end timestamp:" .. ngx.time() .. " randomTime:" .. rmdTime .. "::" .. userAgent .. "::" .. httpReferer .. "::", ip, reqUri)
         end
     end

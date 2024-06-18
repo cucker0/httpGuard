@@ -44,6 +44,7 @@ c. 文件权限设置
 假设运行 nginx 服务的用户是 nginx。
 ```bash
 chown nginx:nginx /etc/nginx/httpGuard/url-protect/byDeny_ip_list.txt /etc/nginx/httpGuard/url-protect/byWhite_ip_list.txt
+chown nginx:nginx /etc/nginx/httpGuard/logs
 ```
 
 3. 配置 HttpGuard
@@ -52,6 +53,18 @@ chown nginx:nginx /etc/nginx/httpGuard/url-protect/byDeny_ip_list.txt /etc/nginx
 
 在 nginx http {} 中添加如下内容，请根据具体的路径更改相关路径
 ```
+user nginx nginx;
+worker_processes auto;
+
+error_log logs/error.log;
+pid logs/nginx.pid;
+worker_rlimit_nofile 65535;
+
+events {
+    use epoll;
+    worker_connections 65535;
+}
+
 http {
     # ...
     lua_package_path "/etc/nginx/httpGuard/?.lua";
@@ -68,7 +81,8 @@ http {
     init_by_lua_file "/etc/nginx/httpGuard/init.lua";
     access_by_lua_file "/etc/nginx/httpGuard/runtime.lua";
     lua_max_running_timers 1;
-
+    
+    include /etc/nginx/conf.d/*.conf;
 }
 ```
 4. 配置 HttpGuard 管理后台
@@ -112,7 +126,7 @@ server {
     deny all;
 
     # 密码认证
-    auth_basic "Authentication";
+    auth_basic "My_HTTP_Basic_Authentication";
     auth_basic_user_file /etc/nginx/auth_basic;
 
     # man page

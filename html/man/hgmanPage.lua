@@ -1,4 +1,4 @@
--- hgmanPage
+--hgmanPage
 
 local hgmanPage = [[
 <!doctype html>
@@ -78,4 +78,3 @@ ngx.say(hgmanPage)
 ngx.say('<div id="Ta"><a href="/hgman">updateList</a>&nbsp;&nbsp;<a href="/hgsystem">updateSystem</a>&nbsp;&nbsp;<a href="#" id="user_logout">Logout</a> &nbsp;&nbsp;&nbsp;Version: ', _Conf.hg_version, '</div>')
 ngx.say('</body>')
 ngx.say('</html>')
-

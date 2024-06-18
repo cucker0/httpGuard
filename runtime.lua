@@ -19,7 +19,7 @@ local jsModule = ngx.var.js_module
 local cookieModule = ngx.var.cookie_module
 local byDenyModule = ngx.var.byDeny_module
 
--- URL是否全部转换成小写
+--URL是否全部转换成小写
 local function stringLower(s)
     if string.lower(Config.hgModules.urlIgnoreCase) == "on" then
         s = string.lower(s)
@@ -42,7 +42,7 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
 
 
     if not Guard:ipInByDenyList(ip) then
-        -- not in byDeny名单
+        --not in byDeny名单
         --随机延时处理URL
         Guard:randomDelayProcessing(ip, reqUri, address, userAgent, httpReferer)
 
@@ -52,7 +52,7 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
         end
 
         if not Guard:ipInByWhiteList(ip) then
-            -- not in 白名单
+            --not in 白名单
             --在needVerify列表的的IP弹出验证页面
             Guard:needVerify(ip, reqUri, address)
 
@@ -89,15 +89,6 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
 
                 --限制请求速率模块.
                 Guard:limitReqModules(ip, reqUri, address, limitModule)
-                --if _Conf.limitReqModulesIsOn then --limitReq模块是否开启
-                --	if not (limitModule == "off") then
-                -- Guard:debug("[limitReqModules] limitReqModules is on.",ip,reqUri)
-                --	Guard:limitReqModules(ip,reqUri,address)
-                --end
-                --elseif limitModule == "on" then
-                -- Guard:debug("[limitReqModules] limitReqModules is on.",ip,reqUri)
-                --Guard:limitReqModules(ip,reqUri,address)
-                --end
 
                 local oneKeyOpenVerificationOn = _Conf.dict_system:get("oneKeyOpenVerificationOn")
                 if oneKeyOpenVerificationOn == 1 then
@@ -108,11 +99,11 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
                     if redirectOn == 1 then
                         --判断转向模块是否开启
                         if not (redirectModule == "off") then
-                            -- Guard:debug("[redirectModules] redirectModules is on.",ip,reqUri)
+                            --Guard:debug("[redirectModules] redirectModules is on.",ip,reqUri)
                             Guard:redirectModules(ip, reqUri, address)
                         end
                     elseif redirectModule == "on" then
-                        -- Guard:debug("[redirectModules] redirectModules is on.",ip,reqUri)
+                        --Guard:debug("[redirectModules] redirectModules is on.",ip,reqUri)
                         Guard:redirectModules(ip, reqUri, address)
                     end
 
@@ -134,11 +125,11 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
                     if cookieOn == 1 then
                         --判断是否开启cookie模块
                         if not (cookieModule == "off") then
-                            -- Guard:debug("[cookieModules] cookieModules is on.",ip,reqUri)
+                            --Guard:debug("[cookieModules] cookieModules is on.",ip,reqUri)
                             Guard:cookieModules(ip, reqUri, address, userAgent, httpReferer)
                         end
                     elseif cookieModule == "on" then
-                        -- Guard:debug("[cookieModules] cookieModules is on.",ip,reqUri)
+                        --Guard:debug("[cookieModules] cookieModules is on.",ip,reqUri)
                         Guard:cookieModules(ip, reqUri, address, userAgent, httpReferer)
                     end
 

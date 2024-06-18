@@ -21,7 +21,7 @@ end
 --生成密码
 local function makePassword()
     local string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    math.randomseed(os.time()) --随机种子
+    math.randomseed(os.time())  --随机种子
     local r1 = math.random(1, 62)  --生成1-62之间的随机数
     local r2 = math.random(1, 62)  --生成1-62之间的随机数
     local r3 = math.random(1, 62)  --生成1-62之间的随机数
@@ -44,7 +44,7 @@ local function makePassword()
 end
 
 local function stringLower(s)
-    -- url是否转小写
+    --url是否转小写
     if string.lower(Config.hgModules.urlIgnoreCase) == "on" then
         s = string.lower(s)
     end
@@ -500,7 +500,6 @@ if string.lower(Config.keyDefine) == "dynamic" then
     _Conf.captchaKey = makePassword()
     _Conf.clickKey = makePassword()
 end
-
 
 --读取动态管理参数到字典
 if string.lower(Config.hgModules.manType) == "dynamic" then

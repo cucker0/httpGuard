@@ -1,4 +1,4 @@
--- hgmanPage2
+--hgmanPage2
 
 local hgmanPage = [[
 <!doctype html>

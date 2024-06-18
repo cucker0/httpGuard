@@ -876,6 +876,3 @@ if list_type == "needVerify" then
         dict_needVerify:flush_all()
     end
 end
-
-
-

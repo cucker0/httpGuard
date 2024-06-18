@@ -1,4 +1,4 @@
--- updateSystemPage
+--updateSystemPage
 
 if string.lower(_Conf.hgModules.manType) == "static" then
     local hh = "<br>"
@@ -17,13 +17,13 @@ if string.lower(_Conf.hgModules.manType) == "static" then
     local byDenyIpModulesIsOn = _Conf.byDenyIpModulesIsOn
     local black2byDenyIsOn = _Conf.black2byDenyIsOn
     local urlAllowProtect = _Conf.urlAllowProtect
-    local get_urlDenyProtect = _Conf.urlDenyProtect        -- type is table
+    local get_urlDenyProtect = _Conf.urlDenyProtect  --type is table
     local limitUrlProtect = _Conf.limitUrlProtect
     local redirectUrlProtect = _Conf.redirectUrlProtect
     local JsJumpUrlProtect = _Conf.JsJumpUrlProtect
     local cookieUrlProtect = _Conf.cookieUrlProtect
-    local get_postArgsDenyProtect = _Conf.postArgsDenyProtect        -- type is table
-    local get_rateLimitUrlProtect = _Conf.rateLimitUrlProtect        -- array table
+    local get_postArgsDenyProtect = _Conf.postArgsDenyProtect  --type is table
+    local get_rateLimitUrlProtect = _Conf.rateLimitUrlProtect  --array table
     local oneKeyOpenVerificationIsOn = _Conf.dict_system:get("oneKeyOpenVerificationOn")
     local oneKeyOpenVerification_whiteTime = _Conf.dict_system:get("oneKeyOpenVerification_whiteTime")
 
@@ -494,12 +494,12 @@ elseif string.lower(_Conf.hgModules.manType) == "dynamic" then  --Dynamic
     local byDenyIpModulesIsOn = dict:get("byDenyIpModules_state")
     local black2byDenyIsOn = dict:get("byDenyIpModules_black2byDenyState")
     local urlAllowProtect = dict:get("urlAllowProtect")
-    local get_urlDenyProtect = _Conf.urlDenyProtect        -- type is table
+    local get_urlDenyProtect = _Conf.urlDenyProtect  --type is table
     local limitUrlProtect = dict:get("limitUrlProtect")
     local redirectUrlProtect = dict:get("redirectUrlProtect")
     local JsJumpUrlProtect = dict:get("JsJumpUrlProtect")
     local cookieUrlProtect = dict:get("cookieUrlProtect")
-    local get_postArgsDenyProtect = _Conf.postArgsDenyProtect        -- type is table
+    local get_postArgsDenyProtect = _Conf.postArgsDenyProtect  --type is table
     local black2byDeny_inBlackMax = dict:get("byDenyIpModules_inBlackMax")
     local black2byDeny_amongTime = dict:get("byDenyIpModules_amongTime")
     local black2byDeny_blockTime = dict:get("byDenyIpModules_blockTime")
@@ -513,7 +513,7 @@ elseif string.lower(_Conf.hgModules.manType) == "dynamic" then  --Dynamic
     local JsJumpModules_amongTime = dict:get("JsJumpModules_amongTime")
     local cookieModules_verifyMaxFail = dict:get("cookieModules_verifyMaxFail")
     local cookieModules_amongTime = dict:get("cookieModules_amongTime")
-    local get_rateLimitUrlProtect = _Conf.rateLimitUrlProtect        -- array table
+    local get_rateLimitUrlProtect = _Conf.rateLimitUrlProtect  --array table
     local oneKeyOpenVerificationIsOn = _Conf.dict_system:get("oneKeyOpenVerificationOn")
     local oneKeyOpenVerification_whiteTime = _Conf.dict_system:get("oneKeyOpenVerification_whiteTime")
 
@@ -951,5 +951,3 @@ elseif string.lower(_Conf.hgModules.manType) == "dynamic" then  --Dynamic
     ngx.say('</html>')
 
 end
-
-

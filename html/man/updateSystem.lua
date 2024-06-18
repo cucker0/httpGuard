@@ -2,7 +2,7 @@
 --解析用户操作 hgSystem.lua 页面的动作并执行
 
 --if string.lower(_Conf.hgModules.manType) == "dynamic" then
-ngx.say('<script language=JavaScript> self.opener.location.reload(); </script>')    --刷新 /hgsystem 父窗口
+ngx.say('<script language=JavaScript> self.opener.location.reload(); </script>')  --刷新 /hgsystem 父窗口
 
 ngx.req.read_body()
 local hh = "<br>"
@@ -476,7 +476,8 @@ if string.lower(_Conf.hgModules.manType) == "dynamic" then
 
     end
 
-else  --Static模式
+else
+    --Static模式
     --更新 oneKeyOpenVerification
     if item == "oneKeyOpenVerification" then
         local oneKeyOpenVerificationIsOn = dict_system:get("oneKeyOpenVerificationOn")
