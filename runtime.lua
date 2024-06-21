@@ -112,11 +112,11 @@ if (hgOn and not (hgModule == "off")) or hgModule == "on" then
                     if jsOn == 1 then
                         --判断js跳转模块是否开启
                         if not (jsModule == "off") then
-                            -- Guard:debug("[JsJumpModules] JsJumpModules is on.",ip,reqUri)
+                            --Guard:debug("[JsJumpModules] JsJumpModules is on.",ip,reqUri)
                             Guard:JsJumpModules(ip, reqUri, address)
                         end
                     elseif jsModule == "on" then
-                        -- Guard:debug("[JsJumpModules] JsJumpModules is on.",ip,reqUri)
+                        --Guard:debug("[JsJumpModules] JsJumpModules is on.",ip,reqUri)
                         Guard:JsJumpModules(ip, reqUri, address)
                     end
 

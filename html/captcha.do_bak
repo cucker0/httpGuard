@@ -3,37 +3,92 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>输入验证码</title>
     <style>
-        body {font-family: Tahoma, Verdana, Arial, sans-serif; }
-        .linear {
-            width:100%;
-            height:100%;
-            FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#FAFAFA,endColorStr=#FFC800);  /*IE*/
-            background: -moz-linear-gradient(top,#FAFAFA,#FFC800);  /*火狐*/
-            background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#FAFAFA), to(#FFC800));  /*谷歌*/
-            background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #FAFAFA),color-stop(1, #FFC800));  /* Safari & Chrome*/
-            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FAFAFA', endColorstr='#FFC800');  /*IE6 & IE7*/
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FAFAFA', endColorstr='#FFC800')";  /* IE8 */
-            background: -ms-linear-gradient(top,#FAFAFA ,#FFC800);  /* IE11 */
+        body {
+            font-family: Tahoma, Verdana, Arial, sans-serif;
         }
-        .copyright {line-height: 20px; margin-top:300px; text-align: center; color:#666666; font-size: 14px;}
-        .head_title {margin-top:100px; font-family:"微软雅黑"; font-size:50px; font-weight:lighter;}
-        p {font-family:"微软雅黑"; font-size:16px; font-weight:lighter; color:#666666;}
-        .btn { float:left;margin-left:15px; margin-top:5px; width:85px; height:30px; background:#56c458;font-family:"微软雅黑"; font-size:16px; color:#FFFFFF; border:0; cursor:pointer;}
-        .inp_s { float:left; margin-left:15px; margin-top:5px; width:200px; height:30px;}
-        .yz {float:left; width:160px; height:40px;}
-        .fors{ margin:0 auto;width:500px; height:40px;}
+
+        .linear {
+            width: 100%;
+            height: 100%;
+            filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#FAFAFA, endColorStr=#FFC800); /*IE*/
+            background: -moz-linear-gradient(top, #FAFAFA, #FFC800); /*火狐*/
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FAFAFA), to(#FFC800)); /*谷歌*/
+            background-image: -webkit-gradient(linear, left bottom, left top, color-start(0, #FAFAFA), color-stop(1, #FFC800)); /* Safari & Chrome*/
+            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#FAFAFA', endColorstr='#FFC800'); /*IE6 & IE7*/
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FAFAFA', endColorstr='#FFC800')"; /* IE8 */
+            background: -ms-linear-gradient(top, #FAFAFA, #FFC800); /* IE11 */
+        }
+
+        .copyright {
+            line-height: 20px;
+            margin-top: 300px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .head_title {
+            margin-top: 100px;
+            font-family: "微软雅黑";
+            font-size: 50px;
+            font-weight: lighter;
+        }
+
+        p {
+            font-family: "微软雅黑";
+            font-size: 16px;
+            font-weight: lighter;
+            color: #666666;
+        }
+
+        .btn {
+            float: left;
+            margin-left: 15px;
+            margin-top: 5px;
+            width: 85px;
+            height: 30px;
+            background: #56c458;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: #FFFFFF;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .inp_s {
+            float: left;
+            margin-left: 15px;
+            margin-top: 5px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .yz {
+            float: left;
+            width: 160px;
+            height: 40px;
+        }
+
+        .fors {
+            margin: 0 auto;
+            width: 500px;
+            height: 40px;
+        }
     </style>
 
 </head>
 <body class="linear">
-    <div align="center">
-        <p><h1 class="head_title">提示：</h1></p>
-        <p>您的请求异常。为了保护我们的用户，暂时不能处理您的请求。 </p>
-        <p>要继续访问网站，请输入下面的验证码：</p>
-        <form  class="fors"  action="/verify-captcha.do" method="POST">
-            <img class="yz" src="/get-captcha.do" alt="Captcha image"><input class="inp_s" type="text" name="response" /><input class="btn" type="submit" value="确定" />
-        </form>
-    </div>
+<div align="center">
+    <p>
+    <h1 class="head_title">提示：</h1></p>
+    <p>您的请求异常。为了保护我们的用户，暂时不能处理您的请求。 </p>
+    <p>要继续访问网站，请输入下面的验证码：</p>
+    <form class="fors" action="/verify-captcha.do" method="POST">
+        <img class="yz" src="/get-captcha.do" alt="Captcha image">
+        <input class="inp_s" type="text" name="response"/>
+        <input class="btn" type="submit" value="确定"/>
+    </form>
+</div>
 
 </body>
 </html>

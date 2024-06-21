@@ -3,25 +3,72 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>提示</title>
     <style>
-        body { font-family: Tahoma, Verdana, Arial, sans-serif; }
-        .head_title { margin-top:100px; font-family:"微软雅黑"; font-size:50px; font-weight:lighter;}
-        p {font-family:"微软雅黑"; font-size:16px; font-weight:lighter; color:#666666;}
-        .btn { float:left;margin-left:15px; margin-top:5px; width:85px; height:30px; background:#56c458;font-family:"微软雅黑"; font-size:16px; color:#FFFFFF; border:0; cursor:pointer;}
-        .inp_s { float:left; margin-left:15px; margin-top:5px; width:200px; height:30px;}
-        .yz {float:left; width:160px; height:40px;}
-        .fors { margin:0 auto;width:500px; height:40px;}
+        body {
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+
+        .head_title {
+            margin-top: 100px;
+            font-family: "微软雅黑";
+            font-size: 50px;
+            font-weight: lighter;
+        }
+
+        p {
+            font-family: "微软雅黑";
+            font-size: 16px;
+            font-weight: lighter;
+            color: #666666;
+        }
+
+        .btn {
+            float: left;
+            margin-left: 15px;
+            margin-top: 5px;
+            width: 85px;
+            height: 30px;
+            background: #56c458;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: #FFFFFF;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .inp_s {
+            float: left;
+            margin-left: 15px;
+            margin-top: 5px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .yz {
+            float: left;
+            width: 160px;
+            height: 40px;
+        }
+
+        .fors {
+            margin: 0 auto;
+            width: 500px;
+            height: 40px;
+        }
     </style>
 </head>
 
 <body>
-    <div align="center">
-        <p><h1 class="head_title">提示：</h1></p>
-        <p>您的访问过于频繁 ... </p>
-        <p>继续访问，请输入下面的验证码：</p>
-        <p><font color="red">验证码错误，请重新输入</font></p>
-        <form class="fors" action="/verify-captcha.do" method="POST">
-            <img class="yz" src="/get-captcha.do" alt="Captcha image" onclick="window.location.reload()" ><input class="inp_s" type="text" name="response" ><input class="btn" type="submit" value="确定" >
-        </form>
-    </div>
+<div align="center">
+    <p>
+    <h1 class="head_title">提示：</h1></p>
+    <p>您的访问过于频繁 ... </p>
+    <p>继续访问，请输入下面的验证码：</p>
+    <p><font color="red">验证码错误，请重新输入</font></p>
+    <form class="fors" action="/verify-captcha.do" method="POST">
+        <img class="yz" src="/get-captcha.do" alt="Captcha image" onclick="window.location.reload()">
+        <input class="inp_s" type="text" name="response">
+        <input class="btn" type="submit" value="确定">
+    </form>
+</div>
 </body>
 </html>
