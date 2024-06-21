@@ -85,8 +85,8 @@
     <p>要继续访问网站，请输入下面的验证码：</p>
     <form class="fors" action="/verify-captcha.do" method="POST">
         <img class="yz" src="/get-captcha.do" alt="Captcha image">
-        <input class="inp_s" type="text" name="response"/>
-        <input class="btn" type="submit" value="确定"/>
+        <input class="inp_s" type="text" name="response">
+        <input class="btn" type="submit" value="确定">
     </form>
 </div>
 

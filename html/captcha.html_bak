@@ -65,8 +65,8 @@
     <p>要继续访问网页，请输入下面所示字符：</p>
     <form class="fors" action="/verify-captcha.jpg" method="POST">
         <img class="yz" src="/get-captcha.jpg" alt="Captcha image">
-        <input class="inp_s" type="text" name="response"/>
-        <input class="btn" type="submit" value="确定"/>
+        <input class="inp_s" type="text" name="response">
+        <input class="btn" type="submit" value="确定">
     </form>
 </div>
 </body>
