@@ -14,6 +14,9 @@ httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防�
 * User-Agent 过滤
 * 人机识别（验证码、JS跳转、HTTP 302跳转方式实现）
 
+## HTTP请求处理流程
+![](https://github.com/cucker0/file_store/blob/master/httpGuard/waf_process_flow.jpg)
+
 ## 设置说明：
 1. 编译安装nginx
 
