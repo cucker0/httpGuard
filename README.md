@@ -14,6 +14,31 @@ httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防�
 * User-Agent 过滤
 * 人机识别（验证码、JS跳转、HTTP 302跳转方式实现）
 
+## 快速体验
+参考 https://hub.docker.com/r/cucker/waf
+
+```bash
+docker run --name waf \
+ -d \
+ -p 80:80/tcp \
+ -p 443:443/tcp \
+ -p 17818:17818/tcp \
+ cucker/waf:latest
+
+
+// 或
+mkdir -p /data/docker-volume/waf /data/docker-volume/waf-log
+
+docker run --name waf \
+ -d \
+ -p 80:80/tcp \
+ -p 443:443/tcp \
+ -p 17818:17818/tcp \
+ -v /data/docker-volume/waf:/etc/nginx \
+ -v /data/docker-volume/waf-log:/usr/local/nginx/logs \
+ cucker/waf:latest
+```
+
 ## HTTP请求处理流程
 ![](https://github.com/cucker0/file_store/blob/master/httpGuard/waf_process_flow.jpg)
 
