@@ -77,7 +77,7 @@ function make_rand($length = "32") {
     $result = "";
     for($i = 0; $i < $length; $i++) {
         $num[$i] = rand(0, 35);
-        $result. = $str[$num[$i]];
+        $result .= $str[$num[$i]];
     }
     return $result;
 }
