@@ -104,6 +104,8 @@ a. 开启基于Basic的认证
 // 安装 httpd-tools
 yum -y install httpd-tools
 
+touch /etc/nginx/auth_basic
+
 // 创建用户、密码，并保存到指定文件
 htpasswd -c /etc/nginx/auth_basic admin
 New password:  // 输入密码
