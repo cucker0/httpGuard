@@ -79,7 +79,7 @@ events {
 
 http {
     # ...
-    lua_package_path "/etc/nginx/httpGuard/?.lua";
+    lua_package_path "/usr/local/share/lua/5.1/resty/?.lua;;/etc/nginx/httpGuard/?.lua;;";
     lua_shared_dict dict_system 10m;
     lua_shared_dict dict_black 50m;
     lua_shared_dict dict_white 50m;
