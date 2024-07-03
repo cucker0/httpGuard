@@ -105,7 +105,7 @@ a. 开启基于Basic的认证
 yum -y install httpd-tools
 
 // 创建用户、密码，并保存到指定文件
-htpasswd -c /usr/local/nginx/conf/htpasswd admin
+htpasswd -c /etc/nginx/auth_basic admin
 New password:  // 输入密码
 Re-type new password:  // 再次输入密码
 Adding password for user admin
@@ -128,7 +128,7 @@ c. 新建一个 server 配置，创建 /etc/nginx/conf.d/wafman.conf
 ```bash
 server {
     listen 17818;
-    server_name  localhost;
+    server_name localhost;
     set $hg_module off;
     access_log off;
     allow 127.0.0.1;
@@ -170,7 +170,7 @@ server {
     }
 
     location /hg_src {
-        root    /etc/nginx/httpGuard/html/man/;
+        root /etc/nginx/httpGuard/html/man/;
         auth_basic off;
     }
 
