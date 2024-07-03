@@ -27,6 +27,17 @@ httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防�
 2. 生成验证码图片
 
 a. 要求安装有 php。
+```bash
+// 下载安装包及其依赖包
+mkdir -p /usr/local/src/php
+yum -y install --downloadonly --downloaddir=/usr/local/src/php php php-gd
+
+// 
+cd /usr/local/src/php
+rpm -ivh ./php-common-8.0.30-1.el9_2.x86_64.rpm
+rpm -ivh ./php-cli-8.0.30-1.el9_2.x86_64.rpm
+rpm -ivh ./php-gd-8.0.30-1.el9_2.x86_64.rpm
+```
 
 把本项目的克隆到 /etc/nginx/ 目录下，如 /etc/nginx/httpGuard
 
