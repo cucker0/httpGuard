@@ -42,7 +42,7 @@ docker run --name waf \
 ## HTTP请求处理流程
 ![](https://github.com/cucker0/file_store/blob/master/httpGuard/waf_process_flow.jpg)
 
-## 设置说明：
+## 部署 httpGuard
 1. 编译安装nginx
 
 要求扩展lua-nginx-module、ngx_devel_kit、luajit2 等模块
@@ -122,6 +122,9 @@ http {
     include /etc/nginx/conf.d/*.conf;
 }
 ```
+`lua_package_path "/usr/local/share/lua/5.1/resty/?.lua;;"` 用于解决 Nginx 启动时报 "failed to load the 'resty.core' module" 的问题。
+
+
 4. 配置 HttpGuard 管理后台
 
 a. 开启基于Basic的认证
@@ -265,16 +268,151 @@ server {
 }
 ```
 
+## 配置 httpGuard
+配置过程中把它看作 nginx 代理 + WAF
+
+* /etc/nginx 目录结构  
+    包含 httpGuard 配置、Nginx 配置
+    ```bash
+    $  tree -L 2 /etc/nginx
+    /etc/nginx
+    ├── auth_basic
+    ├── conf.d  // nginx Web Server 配置文件
+    │   ├── default.conf
+    │   └── wafman.conf
+    ├── fastcgi.conf
+    ├── fastcgi.conf.default
+    ├── fastcgi_params
+    ├── fastcgi_params.default
+    ├── httpGuard
+    │   ├── captcha
+    │   ├── configBackup
+    │   ├── config.lua  // httpGuard 主要配置文件
+    │   ├── guard_dynamic.lua
+    │   ├── guard_static.lua
+    │   ├── html  // httpGuard 管理后台 API
+    │   ├── init.lua
+    │   ├── logs  // httpGuard 调试日志
+    │   ├── README.md
+    │   ├── runtime.lua
+    │   └── url-protect  // httpGuard IP黑名单、IP白名单等模块的ACL
+    ├── koi-utf
+    ├── koi-win
+    ├── man  // http://<IP>:17818/man 管理后台
+    │   ├── index.html
+    │   └── src
+    ├── mime.types
+    ├── mime.types.default
+    ├── nginx.conf  // 入口配置文件
+    ├── nginx.conf.default
+    ├── scgi_params
+    ├── scgi_params.default
+    ├── stream.d
+    │   └── README.md
+    ├── uwsgi_params
+    ├── uwsgi_params.default
+    └── win-utf
+    ```
+    httpGuard 的主要配置文件：/etc/nginx/httpGuard/config.lua
+    
+    httpGuard IP黑名单、IP白名单等模块的ACL 位置：/etc/nginx/httpGuard/url-protect/
+    
+1. 开启 httpGuard
+
+    编辑 /etc/nginx/httpGuard/config.lua
+    ```lua
+    local Config = {
+        --HttpGuard是否开启
+        --state : 为此模块的状态, 表示开启或关闭, 可选值为 "On" 或 "Off". 此项为全局开关,还可以针对单个网站设置开关. 当全局开关为off时,在某一网站的server{}代码块中加入set $hg_module on;, 表示单独对这个网站开启防攻击,当全局开关为on时,在某一网站的server{}代码块中加入set $hg_module off;,表示单独对这个网站关闭防攻击.
+        --manType 管理模式,可选值: static, dynamic
+        --    static : 静态管理模式,即 init.lua初始化参数 到 nginx worker processes,这样执行效率更高,如无需动态管理 init初始参数强烈建议使用 state 模式。
+        --    dynamic : 动态管理模式,即 init.lua初始化参数 到 ngx.shared.DICT 字典中,可以在不nginx不重启/重载的情况下更新init初始化参数,
+        --        从字典get key, ngx.shared.DICT:get("表名_key")  。如果不是表的 ngx.shared.DICT:get("项目名"),.
+        --urlIgnoreCase : URL是否全部转换成小写, On/Off.
+        --    On : 是,把URL中所有大写字母转成小写.
+        --    Off : 否,保持用户请求的URL不变.
+        hgModules = { state = "On", manType = "dynamic", urlIgnoreCase = "On" },
+        
+        --...
+    }
+    ```
+    state = "On"  // 开启 HttpGuard，全局生效，对该 nginx 主机上的所有 server 生效。
+    
+    manType = "static"  // 静态管理模式。
+    
+    manType = "dynamic"  // 动态管理模式。动态开启/关闭相应的模块，动态修改各模块的ACL规则、IP黑名单、IP白名单、URL黑名单、URL白名单等
+2. 单独关闭个别 server 的httpGuard 防护
+
+    场景：在全局开启 httpGuard 的情况下，需要单独关闭 指定 server 的 httpGuard 防护功能。
+    
+    编辑 该 server 的配置
+    ```nginx
+    server {
+        listen 80;
+        server_name www.qq.com;
+        set $hg_module off;
+        
+        # ...
+    }
+    ```
+    添加变量`set $hg_module off;`
+
+    当 server {} 中没有定义变量 `$hg_module`，则该 server 是否启用 httpGuard 只受全局 httpGuard 开关的影响。
+
+3. 单独开启个别 server 的 httpGuard 防护
+
+    场景：在全局关闭 httpGuard 的情况下，需要开启 指定 server 的 httpGuard 防护功能。
+    
+    编辑 该 server 的配置
+    ```nginx
+    server {
+        listen 80;
+        server_name www.qq.com;
+        set $hg_module on;
+        
+        # ...
+    }
+    ```
+    添加变量`set $hg_module on;`
+4. httpGuard 各模块的ACL
+    
+    格式请参考文档的格式。有些支持正则。
+    ```bash
+    $ tree /etc/nginx/httpGuard/url-protect/
+    /etc/nginx/httpGuard/url-protect/
+    ├── 302.txt  // HTTP 302 验证 ACL
+    ├── byDeny_ip_list.txt  // IP 黑名单
+    ├── byWhite_ip_list.txt  // IP 白名单
+    ├── cookieArgsDeny_tab.txt  // cookie 参数黑名单
+    ├── cookie.txt  // cookie 挑战 URL 名单
+    ├── getArgsDeny_tab.txt  // HTTP GET 方法的参数黑名单
+    ├── httpRefererAllow.txt  // HTTP Referer 白名单
+    ├── httpRefererDeny.txt  // HTTP Referer 黑名单
+    ├── js.txt  // js 验证挑战 URL 名单
+    ├── limit.txt  // HTTP 请求限速挑战 URL 名单
+    ├── noneRefererPages.txt  // 允许无 HTTP Referer 的 URL 名单
+    ├── perUrlRateLimit.txt  // 每 URL 限速 ACL
+    ├── postArgsDeny_tab.txt  // HTTP POST 方法的参数黑名单
+    ├── preurlVerifyCaptcha.txt  // 定义上次访问 URL 中包含的静态资源的类型。这些URL验证后跳转到首页。
+    ├── randomDelayProcessing.txt  // 随机延时处理 URL 名单
+    ├── rateLimit.txt  // 访问频率限速名单
+    ├── showPostArgAndCookieArgPages.txt  // Post 参数、 Cookie 参数 需要输出日志的 URL 名单
+    ├── urlAllow.txt  // URL 白名单
+    ├── urlAllow.txt_bak
+    ├── urlDeny_tab.txt  // URL 黑名单
+    ├── userAgentAllow.txt  // User Agent 白名单
+    └── userAgentDeny.txt  // User Agent 黑名单
+    ```
 5. 验证测试
 
-重启 nginx 服务
-```bash
-systemctl restart nginx
-```
+    重启 nginx 服务
+    ```bash
+    systemctl restart nginx
+    ```
 
-通过 `http://[server_name]/man` 进行访问管理
-
-后台管理界面
+    通过 `http://[server_name]/man` 进行访问管理
+    
+    后台管理界面
 
 ![](https://github.com/cucker0/file_store/blob/master/httpGuard/man.png)
 
