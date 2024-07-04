@@ -5,14 +5,14 @@ httpGuard
 httpGuard 是一个基于 Lua 语言开发的应用于 Nginx 的 WEB 应用防火墙（WAF）。用于阻断恶意非法的请求，放行合法的请求。
 
 ## 功能
-* 支持 IP 黑名单、IP 白名单
-* URL 过滤（URL 黑名单、URL 白名单）
-* URL 访问频率限制
-* POST 参数过滤
-* GET 参数过滤（Query Args 过滤）
-* Cookie过滤
-* User-Agent 过滤
-* 人机识别（验证码、JS跳转、HTTP 302跳转方式实现）
+* CC、DDoS 恶意攻击防护。
+* 防御 SQL 注入、XSS 跨站、目录遍历、命令注入等。
+* 支持 IP 黑名单、IP 白名单。
+* 支持 URL 过滤（URL 黑名单、URL 白名单）。
+* 人机识别（验证码、HTTP 重定向 、JS跳转等方式实现）。
+* 异常 Referer、User-Agent 特征识别过滤。
+* 基于 源IP 的 URL 访问频率限制。
+* 支持 POST 参数过滤、GET 参数过滤（Query Args 过滤）、Cookie过滤等。
 
 ## 快速体验
 参考 https://hub.docker.com/r/cucker/waf
